@@ -1,0 +1,141 @@
+[
+  {
+    "chainId": 56,
+    "chainName": "BSC Mainnet",
+    "nativeCurrency": {
+      "name": "Binance Coin",
+      "symbol": "BNB",
+      "decimals": 18
+    },
+    "rpcUrls": [
+      "https://bsc-dataseed.binance.org"
+    ],
+    "blockExplorerUrls": [
+      "https://bscscan.com/"
+    ],
+    "timelockAddress": "0x8f0fFc8C7FC3157697Bdbf94B328F7141d6B41de",
+    "timelockMethod": "CallScheduled",
+    "queryBlockAmount": 5000,
+    "timelockBlocks": 21600,
+    "abiUrl": "http://api.bscscan.com/api?module=contract&action=getabi&address=$address&format=raw"
+  },
+  {
+    "chainId": 128,
+    "chainName": "HECO Mainnet",
+    "nativeCurrency": {
+      "name": "Huobi Token",
+      "symbol": "HT",
+      "decimals": 18
+    },
+    "rpcUrls": [
+      "https://http-mainnet.hecochain.com"
+    ],
+    "blockExplorerUrls": [
+      "https://hecoinfo.com/"
+    ],
+    "timelockAddress": "0x6d28afD25a1FBC5409B1BeFFf6AEfEEe2902D89F",
+    "timelockMethod": "CallScheduled",
+    "queryBlockAmount": 5000,
+    "timelockBlocks": 86400,
+    "abiUrl": "https://api.hecoinfo.com/api?module=contract&action=getabi&address=$address&format=raw"
+  },
+  {
+    "chainId": 43114,
+    "chainName": "Avalanche C-Chain",
+    "nativeCurrency": {
+      "name": "AVAX",
+      "symbol": "AVAX",
+      "decimals": 18
+    },
+    "rpcUrls": [
+      "https://api.avax.network/ext/bc/C/rpc"
+    ],
+    "blockExplorerUrls": [
+      "https://cchain.explorer.avax.network/"
+    ],
+    "timelockAddress": "0x6d28afD25a1FBC5409B1BeFFf6AEfEEe2902D89F",
+    "timelockMethod": "CallScheduled",
+    "timelockBlocks": 86400,
+    "queryBlockAmount": 5000
+  },
+  {
+    "chainId": 137,
+    "chainName": "Polygon Mainnet",
+    "nativeCurrency": {
+      "name": "MATIC",
+      "symbol": "MATIC",
+      "decimals": 18
+    },
+    "rpcUrls": [
+      "https://matic-mainnet.chainstacklabs.com"
+    ],
+    "blockExplorerUrls": [
+      "https://polygonscan.com/"
+    ],
+    "timelockAddress": "0x6d28afD25a1FBC5409B1BeFFf6AEfEEe2902D89F",
+    "timelockMethod": "CallScheduled",
+    "queryBlockAmount": 5000,
+    "timelockBlocks": 86400,
+    "abiUrl": "https://api.polygonscan.com/api?module=contract&action=getabi&address=$address&format=raw"
+  },
+  {
+    "chainId": 250,
+    "chainName": "Fantom Opera",
+    "nativeCurrency": {
+      "name": "FTM",
+      "symbol": "FTM",
+      "decimals": 18
+    },
+    "rpcUrls": [
+      "https://rpcapi.fantom.network"
+    ],
+    "blockExplorerUrls": [
+      "https://ftmscan.com/"
+    ],
+    "timelockAddress": "0x6d28afD25a1FBC5409B1BeFFf6AEfEEe2902D89F",
+    "timelockMethod": "CallScheduled",
+    "queryBlockAmount": 5000,
+    "timelockBlocks": 86400,
+    "abiUrl": "https://api.ftmscan.com/api?module=contract&action=getabi&address=$address&format=raw"
+  },
+  {
+    "chainId": 1666600000,
+    "chainName": "Harmony One",
+    "nativeCurrency": {
+      "name": "ONE",
+      "symbol": "ONE",
+      "decimals": 18
+    },
+    "rpcUrls": [
+      "https://api.s0.t.hmny.io/"
+    ],
+    "blockExplorerUrls": [
+      "https://explorer.harmony.one/"
+    ],
+    "abiUrl": "https://ctrver.t.hmny.io/fetchContractCode?contractAddress=$address",
+    "timelockAddress": "0x6d28afD25a1FBC5409B1BeFFf6AEfEEe2902D89F",
+    "timelockMethod": "CallScheduled",
+    "queryBlockAmount": 5000,
+    "timelockBlocks": 86400
+  },
+  {
+    "chainId": 42161,
+    "chainName": "Arbitrum One",
+    "nativeCurrency": {
+      "name": "ETH",
+      "symbol": "ETH",
+      "decimals": 18
+    },
+    "rpcUrls": [
+      "https://arb1.arbitrum.io/rpc"
+    ],
+    "blockExplorerUrls": [
+      "https://arbiscan.io/"
+    ],
+    "timelockAddress": "0x6d28afD25a1FBC5409B1BeFFf6AEfEEe2902D89F",
+    "timelockMethod": "CallScheduled",
+    "queryBlockAmount": 5000,
+    "timelockBlocks": 21600,
+    "abiUrl": "https://api.arbiscan.io/api?module=contract&action=getabi&address=$address&format=raw"
+  }
+]
