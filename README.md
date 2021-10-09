@@ -1,6 +1,6 @@
-#Setup
+# Setup
 
-##contract abi's
+## contract abi's
 
 either:
 
@@ -8,7 +8,7 @@ either:
 
  - add a api that gives you raw abi's of your chain into network_configs.json, you can check polygon and bsc for examples
 
-        "abiUrl":"http://api.bscscan.com/api?module=contract&action=getabi&address=**$address**&format=raw"
+        "abiUrl":"http://api.bscscan.com/api?module=contract&action=getabi&address=$address&format=raw"
 
     use $address as the uri-argument, the script will do the rest
 
@@ -16,7 +16,7 @@ either:
 
 place all the tokens you want to auto-withdraw, in case their beefy-strategy changes, into config.json.
 
-##config fields
+## config fields
 
  - chainId
  - address: the address of the token you want to auto-withdraw
