@@ -44,17 +44,18 @@ def get_contract_abi(network, address):
 
 
 def withdraw_from_beefy(w3, network, token):
-    #TODO get pubkey from privkey
     token_contract = w3.eth.contract(address=token['address'],
                                      abi=get_contract_abi(
                                          network, token['address']))
-    nonce = w3.eth.get_transaction_count(pubkey)
-    withdraw_function = getattr(token_contract, token['method'])
-    #TODO check if gas is required
-    unsigned_tx = withdraw_function.call().buildTransaction({
+    nonce = w3.eth.get_transaction_count(token['yourPubKey'])
+    withdraw_function = getattr(token_contract.functions, token['method'])
+
+    unsigned_tx = withdraw_function().buildTransaction({
+        'from':token['yourPubKey'],
         'chainId': token['chainId'],
         'nonce': nonce
     })
+    print(unsigned_tx)
     signed_tx = w3.eth.account.sign_transaction(unsigned_tx,
                                                 private_key=token['privateKey'])
     w3.eth.send_raw_transaction(signed_tx)
@@ -65,7 +66,7 @@ def check_blocks_for_event(w3, contract, tokens, network, from_block, to_block):
     event = getattr(contract.events, network['timelockMethod'])
     event_filter = event.createFilter(fromBlock=from_block, toBlock=to_block)
     try:
-        for Pair in event_filter.get_all_entries():
+        for Pair in event_filter.get_new_entries():
             print(Pair)
             # print(Pair.hex())
             try:
@@ -84,7 +85,8 @@ def check_blocks_for_event(w3, contract, tokens, network, from_block, to_block):
         print(ex)
         # print(dir(Pair))
     network['last_height'] = to_block - 1
-    time.sleep(900 / len(networks))
+    print(f"last height: {network['last_height']}")
+    time.sleep(60 / len(networks))
 
 
 def main():
@@ -99,16 +101,26 @@ def main():
                 token for token in watched_tokens
                 if token['chainId'] == network['chainId']
             ]
-            w3 = Web3(Web3.HTTPProvider(network['rpcUrls'][0]))
+            if 'instance' not in network:
+                w3 = Web3(Web3.HTTPProvider(network['rpcUrls'][0]))
+                network['instance'] = w3
+            else:
+                w3 = network['instance']
             timelock_abi = get_contract_abi(network, network['timelockAddress'])
             timelock_contract = w3.eth.contract(
                 address=network['timelockAddress'], abi=timelock_abi)
             latest_block = w3.eth.block_number
+            print("latest block: %s" % latest_block)
             from_block = network['last_height'] if 'last_height' in network \
                 else latest_block - network['timelockBlocks']
+            if latest_block < from_block:
+                print("possible chain reorg?")
+                from_block = latest_block
+            print("from block: %s" % from_block)
             to_block = latest_block if from_block + network[
                 'queryBlockAmount'] > latest_block else from_block + network[
                     'queryBlockAmount']
+            print("to block: %s" % to_block)
             check_blocks_for_event(w3, timelock_contract,
                                    tokens_on_current_chain, network, from_block,
                                    to_block)

@@ -3,12 +3,14 @@
     "chainId": 56,
     "address": "0xD411121C948Cff739857513E1ADF25ED448623f8",
     "method": "withdrawAll",
-    "privateKey": "lol NO"
+    "privateKey": "lol NO",
+    "yourPubKey": "fuck the web3 docs, just paste it from metamask or something"
   },
   {
     "chainId": 137,
     "address": "0x5a0801bad20b6c62d86c566ca90688a6b9ea1d3f",
     "method": "withdrawAll",
-    "privateKey": "lol NO"
+    "privateKey": "lol NO",
+    "yourPubKey": ""
   }
 ]
