@@ -97,33 +97,38 @@ def main():
     # print(watched_tokens)
     while True:
         for network in networks:
-            tokens_on_current_chain = [
-                token for token in watched_tokens
-                if token['chainId'] == network['chainId']
-            ]
-            if 'instance' not in network:
-                w3 = Web3(Web3.HTTPProvider(network['rpcUrls'][0]))
-                network['instance'] = w3
-            else:
-                w3 = network['instance']
-            timelock_abi = get_contract_abi(network, network['timelockAddress'])
-            timelock_contract = w3.eth.contract(
-                address=network['timelockAddress'], abi=timelock_abi)
-            latest_block = w3.eth.block_number
-            print("latest block: %s" % latest_block)
-            from_block = network['last_height'] if 'last_height' in network \
-                else latest_block - network['timelockBlocks']
-            if latest_block < from_block:
-                print("possible chain reorg?")
-                from_block = latest_block
-            print("from block: %s" % from_block)
-            to_block = latest_block if from_block + network[
-                'queryBlockAmount'] > latest_block else from_block + network[
-                    'queryBlockAmount']
-            print("to block: %s" % to_block)
-            check_blocks_for_event(w3, timelock_contract,
-                                   tokens_on_current_chain, network, from_block,
-                                   to_block)
+            try:
+                tokens_on_current_chain = [
+                    token for token in watched_tokens
+                    if token['chainId'] == network['chainId']
+                ]
+                if 'instance' not in network:
+                    w3 = Web3(Web3.HTTPProvider(network['rpcUrls'][0]))
+                    network['instance'] = w3
+                else:
+                    w3 = network['instance']
+                timelock_abi = get_contract_abi(network, network['timelockAddress'])
+                timelock_contract = w3.eth.contract(
+                    address=network['timelockAddress'], abi=timelock_abi)
+                latest_block = w3.eth.block_number
+                print("latest block: %s" % latest_block)
+                from_block = network['last_height'] if 'last_height' in network \
+                    else latest_block - network['timelockBlocks']
+                if latest_block < from_block:
+                    print("possible chain reorg?")
+                    from_block = latest_block
+                print("from block: %s" % from_block)
+                to_block = latest_block if from_block + network[
+                    'queryBlockAmount'] > latest_block else from_block + network[
+                        'queryBlockAmount']
+                print("to block: %s" % to_block)
+                check_blocks_for_event(w3, timelock_contract,
+                                       tokens_on_current_chain, network, from_block,
+                                       to_block)
+            except Exception as e:
+                print(e)
+            finally:
+                print('-'*80)
         # time.sleep(300)
 
 
